@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M7 FUHSD Racing - Multi Series Racing Team</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff0000;
+            --secondary-color: #0066ff;
+            --accent-color: #ffcc00;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --light-text: #ffffff;
+            --gray-text: #a0a0a0;
+            --card-bg: #1a1a1a;
+            --racing-red: #e10600;
+            --racing-blue: #0052cc;
+            --neon-glow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 2px solid var(--primary-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .logo-m7 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-shadow: var(--neon-glow);
+            letter-spacing: 2px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--light-text);
+            letter-spacing: 3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 0, 0.03) 2px,
+                    rgba(255, 0, 0, 0.03) 4px
+                );
+            animation: scanline 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+        }
+
+        .glitch {
+            position: relative;
+            display: inline-block;
+            animation: glitch-skew 3s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--primary-color);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--secondary-color);
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(10px, 9999px, 31px, 0); }
+            20% { clip: rect(85px, 9999px, 140px, 0); }
+            40% { clip: rect(45px, 9999px, 98px, 0); }
+            60% { clip: rect(125px, 9999px, 180px, 0); }
+            80% { clip: rect(15px, 9999px, 65px, 0); }
+            100% { clip: rect(70px, 9999px, 110px, 0); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 119px, 0); }
+            20% { clip: rect(45px, 9999px, 97px, 0); }
+            40% { clip: rect(125px, 9999px, 177px, 0); }
+            60% { clip: rect(15px, 9999px, 63px, 0); }
+            80% { clip: rect(85px, 9999px, 142px, 0); }
+            100% { clip: rect(25px, 9999px, 76px, 0); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            10% { transform: skew(-2deg); }
+            20% { transform: skew(0deg); }
+            30% { transform: skew(2deg); }
+            40% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--gray-text);
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            color: var(--gray-text);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--light-text);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: var(--light-text);
+            color: var(--light-text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light-text);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator {
+            width: 2px;
+            height: 40px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            animation: scroll-pulse 2s ease infinite;
+        }
+
+        @keyframes scroll-pulse {
+            0%, 100% { opacity: 0; transform: scaleY(0); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Mission Section */
+        .mission {
+            padding: 100px 0;
+            background: var(--darker-bg);
+            position: relative;
+        }
+
+        .mission-content {
+            text-align: center;
+        }
+
+        .mission-text {
+            font-size: 1.3rem;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            color: var(--gray-text);
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-shadow: var(--neon-glow);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            display: block;
+            font-size: 1rem;
+            color: var(--gray-text);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-dark {
+            background: var(--darker-bg);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-color);
+            box-shadow: var(--neon-glow);
+        }
+
+        /* Content Cards */
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 50px rgba(255, 0, 0, 0.3);
+        }
+
+        .card-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Drivers Section */
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .driver-card {
+            background: var(--card-bg);
+            border: 2px solid rgba(255, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .driver-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .driver-card:hover::before {
+            left: 100%;
+        }
+
+        .driver-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 50px rgba(255, 0, 0, 0.4);
+        }
+
+        .driver-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            opacity: 0.2;
+            margin-bottom: 1rem;
+            text-shadow: var(--neon-glow);
+        }
+
+        .driver-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .driver-role {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .driver-bio {
+            color: var(--gray-text);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 4px solid var(--dark-bg);
+            box-shadow: var(--neon-glow);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            width: calc(50% - 40px);
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+            margin-left: 40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+            margin-right: 40px;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .timeline-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .timeline-content p {
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+
+        /* Championship Section */
+        .championship-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Support Section */
+        .support {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, #1a0000 100%);
+            text-align: center;
+        }
+
+        .support-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .support-content p {
+            font-size: 1.3rem;
+            color: var(--gray-text);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .support-note {
+            font-style: italic;
+            color: var(--primary-color);
+            font-size: 1.1rem !important;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--darker-bg);
+            padding: 3rem 0 2rem;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 2rem;
+        }
+
+        .footer-disclaimer {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            max-width: 800px;
+            margin: 0 auto 1rem;
+            line-height: 1.6;
+        }
+
+        .footer-copyright {
+            color: var(--gray-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-marker {
+                left: 30px;
+            }
+            
+            .timeline-item,
+            .timeline-item:nth-child(odd) {
+                flex-direction: row;
+            }
+            
+            .timeline-content,
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 2rem;
+                gap: 1rem;
+                transition: left 0.3s ease;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(8px, 8px);
+            }
+            
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stats {
+                gap: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .drivers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .card-content p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-m7 {
+                font-size: 1.5rem;
+            }
+            
+            .logo-text {
+                font-size: 0.9rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+            
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+
+        @keyframes racingLine {
+            0% {
+                top: -100px;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-m7">M7</span>
+                <span class="logo-text">FUHSD RACING</span>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#m7-history" class="nav-link">M7 History</a></li>
+                <li><a href="#fuhsd-history" class="nav-link">FUHSD Racing History</a></li>
+                <li><a href="#drivers" class="nav-link">Driver Lineup</a></li>
+                <li><a href="#teams" class="nav-link">Teams</a></li>
+                <li><a href="#polytrack" class="nav-link">Polytrack</a></li>
+                <li><a href="#team-history" class="nav-link">Team History</a></li>
+                <li><a href="#championship" class="nav-link">Championship</a></li>
+                <li><a href="#sponsors" class="nav-link">Sponsors</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="glitch" data-text="M7 FUHSD RACING">M7 FUHSD RACING</span>
+            </h1>
+            <p class="hero-subtitle">Multi Series Racing Team | Southern Bay Area</p>
+            <div class="hero-description">
+                <p>Pushing the limits. Chasing glory at the 24 Hours of Le Mans and dominating the GP races at K1 Santa Clara.</p>
+            </div>
+            <div class="hero-cta">
+                <a href="#drivers" class="btn btn-primary">Meet The Team</a>
+                <a href="#m7-history" class="btn btn-secondary">Our Story</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll Down</span>
+            <div class="scroll-indicator"></div>
+        </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section id="sponsors" class="section sponsors">
+        <div class="container">
+            <h2 class="section-title">Our Sponsors</h2>
+            <div class="sponsor-grid">
+                <div class="sponsor-badge title-sponsor">Nestlé — Title Sponsor</div>
+                <div class="sponsor-badge">Palantir</div>
+                <div class="sponsor-badge">United Healthcare</div>
+                <div class="sponsor-badge">BlackRock</div>
+                <div class="sponsor-badge">Marlboro</div>
+            </div>
+            <p style="margin-top: 1rem; text-align:center; color: var(--gray-text); font-size: 0.95rem;">
+                For legal reasons: sponsors shown have no actual affiliation with M7 or FUHSD Racing.
+            </p>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-content">
+                <h2 class="section-title">Our Mission</h2>
+                <p class="mission-text">
+                    M7 FUHSD Racing is on a mission to compete at the highest levels of motorsport. 
+                    From local karting championships to the legendary 24 Hours of Le Mans, we're building 
+                    a legacy of speed, precision, and teamwork.
+                </p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">24</span>
+                        <span class="stat-label">Hours of Le Mans</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">K1</span>
+                        <span class="stat-label">Santa Clara GP</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Dedication</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- M7 History Section -->
+    <section id="m7-history" class="section">
+        <div class="container">
+            <h2 class="section-title">M7 History</h2>
+            <div class="content-card">
+                <div class="card-content">
+                    <p>The M7 legacy began with a vision to create a racing team that embodies precision, innovation, and relentless pursuit of excellence. Founded by passionate motorsport enthusiasts from the Southern Bay Area, M7 represents more than just a team—it's a movement.</p>
+                    <p>The M7 designation pays homage to legendary racing heritage while forging a new path in modern motorsport. Our team combines cutting-edge technology with traditional racing values to create a unique identity in the competitive racing world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FUHSD Racing History Section -->
+    <section id="fuhsd-history" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">FUHSD Racing History</h2>
+            <div class="content-card">
+                <div class="card-content">
+                    <p>FUHSD Racing emerged from the Fremont Union High School District, bringing together talented drivers and passionate supporters who share a common love for motorsport. What started as a grassroots initiative has evolved into a competitive racing operation.</p>
+                    <p>Our journey through various racing series has taught us invaluable lessons about teamwork, dedication, and the pursuit of perfection. Each race, each challenge, and each victory has shaped us into the team we are today.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Driver Lineup Section -->
+    <section id="drivers" class="section">
+        <div class="container">
+            <h2 class="section-title">Driver Lineup</h2>
+            <div class="drivers-grid">
+                <div class="driver-card">
+                    <div class="driver-number">01</div>
+                    <div class="driver-info">
+                        <h3 class="driver-name">Lead Driver</h3>
+                        <p class="driver-role">Primary Pilot</p>
+                        <p class="driver-bio">Our lead driver brings years of experience and an unmatched competitive spirit to every race.</p>
+                    </div>
+                </div>
+                <div class="driver-card">
+                    <div class="driver-number">02</div>
+                    <div class="driver-info">
+                        <h3 class="driver-name">Second Driver</h3>
+                        <p class="driver-role">Performance Specialist</p>
+                        <p class="driver-bio">Known for precision driving and tactical race strategy that keeps us competitive.</p>
+                    </div>
+                </div>
+                <div class="driver-card">
+                    <div class="driver-number">03</div>
+                    <div class="driver-info">
+                        <h3 class="driver-name">Reserve Driver</h3>
+                        <p class="driver-role">Development Talent</p>
+                        <p class="driver-bio">Rising star ready to step up and prove their mettle on any circuit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Polytrack Section -->
+    <section id="polytrack" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Polytrack</h2>
+            <div class="content-card">
+                <div class="card-content">
+                    <p>Polytrack represents our commitment to diverse racing disciplines. From karting to endurance racing, we compete across multiple platforms to sharpen our skills and test our limits.</p>
+                    <p>This multi-series approach ensures our drivers are well-rounded competitors capable of adapting to any racing environment, from the tight corners of K1 Santa Clara to the high-speed straights of international circuits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teams & Drivers Section -->
+    <section id="teams" class="section">
+        <div class="container">
+            <h2 class="section-title">Teams & Drivers</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-title">Ferrari 499P Hypercar (13 Car)</div>
+                    <ul class="team-members">
+                        <li>Owen</li>
+                        <li>Hunter</li>
+                        <li>Nate</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Ferrari 499P Hypercar (68 Car)</div>
+                    <ul class="team-members">
+                        <li>Theo Pourchaire</li>
+                        <li>Alex Palou</li>
+                        <li>Logan Sargeant</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Nissan LMP2 Team (5 Car)</div>
+                    <ul class="team-members">
+                        <li>Max Chilton</li>
+                        <li>Jann Mardenborough</li>
+                        <li>Oliver Pla</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Porsche 911 GT3 (33 Car)</div>
+                    <ul class="team-members">
+                        <li>Max Verstappen</li>
+                        <li>Jos Verstappen</li>
+                        <li>Lily Verstappen</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Porsche 911 GT3 (41 Car)</div>
+                    <ul class="team-members">
+                        <li>Jordan</li>
+                        <li>Eli</li>
+                    </ul>
+                    <a class="discord-cta" href="https://discord.gg/9T5zGGSZ" target="_blank" rel="noopener" style="display:inline-block;color:var(--primary-color);font-weight:700;margin-top:8px;">Join the Discord</a>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Nascar 88 Car</div>
+                    <ul class="team-members">
+                        <li>Shane Van Gisbergen</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Nascar 67 Car</div>
+                    <ul class="team-members">
+                        <li>Riley</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Esports Team</div>
+                    <ul class="team-members">
+                        <li>Owen</li>
+                        <li>Hunter</li>
+                        <li>Nate</li>
+                        <li>Jordan</li>
+                    </ul>
+                </div>
+                <div class="team-card">
+                    <div class="team-title">Karting Team</div>
+                    <ul class="team-members">
+                        <li>Owen</li>
+                        <li>Hunter</li>
+                        <li>Jordan <span style="opacity:0.7;">(pretty quick ngl)</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team History Section -->
+    <section id="team-history" class="section">
+        <div class="container">
+            <h2 class="section-title">Team History</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>The Beginning</h3>
+                        <p>Formation of M7 FUHSD Racing with a clear vision to compete at the highest levels of motorsport.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>First Races</h3>
+                        <p>Entering local karting championships and establishing our competitive presence at K1 Santa Clara.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Building Momentum</h3>
+                        <p>Expanding our racing program and developing our driver lineup for future challenges.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>The Future</h3>
+                        <p>Setting our sights on the 24 Hours of Le Mans and international competition.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Championship Section -->
+    <section id="championship" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Polytrack Championship</h2>
+            <div class="championship-container">
+                <div class="content-card">
+                    <div class="card-content">
+                        <p>The Polytrack Championship represents our commitment to excellence across multiple racing disciplines. Our team competes in various series, accumulating points and experience that drive us toward our ultimate goals.</p>
+                        <p>Each championship season brings new challenges, new competitors, and new opportunities to prove our worth on the track. Stay tuned for updates on our championship standings and race results.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support">
+        <div class="container">
+            <h2 class="section-title">Support Our Mission</h2>
+            <div class="support-content">
+                <p>Want to help us reach Le Mans? Support our journey by following our progress and spreading the word about M7 FUHSD Racing.</p>
+                <p class="support-note">(Patreon coming soon - harass us to get it started!)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-m7">M7</span>
+                    <span class="logo-text">FUHSD RACING</span>
+                </div>
+                <p class="footer-disclaimer">
+                    All sponsors and partners shown on this website have no actual affiliation with M7 or FUHSD Racing. 
+                    All sponsorships are for entertainment purposes only.
+                </p>
+                <p class="footer-copyright">
+                    © 2025 M7 FUHSD Racing. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar Background on Scroll
+        const navbar = document.querySelector('.navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                navbar.style.boxShadow = '0 4px 30px rgba(255, 0, 0, 0.3)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.5)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for Fade-in Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.content-card, .driver-card, .timeline-item, .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Active Navigation Link on Scroll
+        const sections = document.querySelectorAll('section[id]');
+
+        function setActiveLink() {
+            const scrollY = window.pageYOffset;
+            
+            sections.forEach(section => {
+                const sectionHeight = section.offsetHeight;
+                const sectionTop = section.offsetTop - 100;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.style.color = 'var(--primary-color)';
+                        } else {
+                            link.style.color = 'var(--light-text)';
+                        }
+                    });
+                }
+            });
+        }
+
+        window.addEventListener('scroll', setActiveLink);
+
+        // Parallax Effect for Hero Section
+        const hero = document.querySelector('.hero');
+        const heroContent = document.querySelector('.hero-content');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxSpeed = 0.5;
+            
+            if (hero && scrolled < hero.offsetHeight) {
+                heroContent.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+                heroContent.style.opacity = 1 - (scrolled / hero.offsetHeight);
+            }
+        });
+
+        // Dynamic Number Counter for Stats
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const isK1 = end === 'K1';
+            const isPercent = end === '100%';
+            const endValue = isK1 || isPercent ? 100 : parseInt(end);
+            
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                
+                let currentValue;
+                if (isK1) {
+                    currentValue = 'K1';
+                } else if (isPercent) {
+                    currentValue = Math.floor(progress * endValue) + '%';
+                } else {
+                    currentValue = Math.floor(progress * endValue);
+                }
+                
+                element.textContent = currentValue;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsSection = document.querySelector('.stats');
+        let statsAnimated = false;
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !statsAnimated) {
+                    const statNumbers = document.querySelectorAll('.stat-number');
+                    statNumbers.forEach(stat => {
+                        const value = stat.textContent.trim();
+                        stat.textContent = '0';
+                        setTimeout(() => {
+                            animateValue(stat, 0, value, 2000);
+                        }, 200);
+                    });
+                    statsAnimated = true;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Timeline Animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 150);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        timelineItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            
+            if (index % 2 === 0) {
+                item.style.transform = 'translateX(-50px)';
+            } else {
+                item.style.transform = 'translateX(50px)';
+            }
+            
+            timelineObserver.observe(item);
+        });
+
+        // Add racing line animation effect
+        function createRacingLines() {
+            const hero = document.querySelector('.hero');
+            const lineCount = 5;
+            
+            for (let i = 0; i < lineCount; i++) {
+                const line = document.createElement('div');
+                line.className = 'racing-line';
+                line.style.cssText = `
+                    position: absolute;
+                    width: 2px;
+                    height: 100px;
+                    background: linear-gradient(180deg, transparent, rgba(255, 0, 0, 0.5), transparent);
+                    top: -100px;
+                    left: ${20 + (i * 20)}%;
+                    animation: racingLine ${3 + Math.random() * 2}s linear infinite;
+                    animation-delay: ${i * 0.5}s;
+                `;
+                hero.appendChild(line);
+            }
+        }
+
+        // Initialize racing lines effect
+        createRacingLines();
+
+        // Driver Cards Interactive Tilt Effect
+        const driverCards = document.querySelectorAll('.driver-card');
+
+        driverCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+
+        // Preload Animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Performance optimization: Throttle scroll events
+        function throttle(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Apply throttling to scroll-heavy functions
+        const throttledSetActiveLink = throttle(setActiveLink, 100);
+        window.removeEventListener('scroll', setActiveLink);
+        window.addEventListener('scroll', throttledSetActiveLink);
+
+        console.log('%c🏁 M7 FUHSD Racing Website Loaded 🏁', 'color: #ff0000; font-size: 20px; font-weight: bold;');
+        console.log('%cBuilt for speed and performance', 'color: #a0a0a0; font-size: 14px;');
+    </script>
+</body>
+</html>
+
