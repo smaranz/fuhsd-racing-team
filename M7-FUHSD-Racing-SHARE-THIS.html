@@ -840,6 +840,13 @@
                 opacity: 0;
             }
         }
+        /* Sponsor logos */
+        .sponsor-logos { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; align-items:center; }
+        .sponsor-logo { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 1rem; text-align:center; }
+        .sponsor-logo img { max-width:160px; max-height:64px; width:100%; height:auto; object-fit:contain; filter: grayscale(100%) brightness(1.1); opacity:0.9; transition: filter .2s ease, opacity .2s ease, transform .2s ease; }
+        .sponsor-logo:hover img { filter: grayscale(0%) drop-shadow(0 0 10px rgba(255,0,0,.25)); opacity:1; transform: translateY(-2px); }
+        .sponsor-logo.title { grid-column: 1 / -1; border-color: rgba(255,0,0,.35); box-shadow: 0 10px 30px rgba(255,0,0,.2); }
+        .sponsor-logo.title figcaption { margin-top:8px; color: var(--primary-color); font-weight:800; letter-spacing:1px; text-transform:uppercase; }
     </style>
 </head>
 <body>
@@ -860,7 +867,7 @@
                 <li><a href="#m7-history" class="nav-link">M7 History</a></li>
                 <li><a href="#fuhsd-history" class="nav-link">FUHSD Racing History</a></li>
                 <li><a href="#drivers" class="nav-link">Driver Lineup</a></li>
-                <li><a href="#teams" class="nav-link">Teams</a></li>
+                <li><a href="#drivers" class="nav-link">Teams</a></li>
                 <li><a href="#polytrack" class="nav-link">Polytrack</a></li>
                 <li><a href="#team-history" class="nav-link">Team History</a></li>
                 <li><a href="#championship" class="nav-link">Championship</a></li>
@@ -895,12 +902,12 @@
     <section id="sponsors" class="section sponsors">
         <div class="container">
             <h2 class="section-title">Our Sponsors</h2>
-            <div class="sponsor-grid">
-                <div class="sponsor-badge title-sponsor">Nestlé — Title Sponsor</div>
-                <div class="sponsor-badge">Palantir</div>
-                <div class="sponsor-badge">United Healthcare</div>
-                <div class="sponsor-badge">BlackRock</div>
-                <div class="sponsor-badge">Marlboro</div>
+            <div class="sponsor-logos">
+                <figure class="sponsor-logo title"><img src="assets/sponsors/nestle.png" alt="Nestlé"/><figcaption>Title Sponsor</figcaption></figure>
+                <figure class="sponsor-logo"><img src="assets/sponsors/palantir.png" alt="Palantir"/></figure>
+                <figure class="sponsor-logo"><img src="assets/sponsors/unitedhealthcare.png" alt="United Healthcare"/></figure>
+                <figure class="sponsor-logo"><img src="assets/sponsors/blackrock.png" alt="BlackRock"/></figure>
+                <figure class="sponsor-logo"><img src="assets/sponsors/marlboro.png" alt="Marlboro"/></figure>
             </div>
             <p style="margin-top: 1rem; text-align:center; color: var(--gray-text); font-size: 0.95rem;">
                 For legal reasons: sponsors shown have no actual affiliation with M7 or FUHSD Racing.
@@ -962,56 +969,10 @@
         </div>
     </section>
 
-    <!-- Driver Lineup Section -->
+    <!-- Combined Teams & Driver Lineup -->
     <section id="drivers" class="section">
         <div class="container">
-            <h2 class="section-title">Driver Lineup</h2>
-            <div class="drivers-grid">
-                <div class="driver-card">
-                    <div class="driver-number">01</div>
-                    <div class="driver-info">
-                        <h3 class="driver-name">Lead Driver</h3>
-                        <p class="driver-role">Primary Pilot</p>
-                        <p class="driver-bio">Our lead driver brings years of experience and an unmatched competitive spirit to every race.</p>
-                    </div>
-                </div>
-                <div class="driver-card">
-                    <div class="driver-number">02</div>
-                    <div class="driver-info">
-                        <h3 class="driver-name">Second Driver</h3>
-                        <p class="driver-role">Performance Specialist</p>
-                        <p class="driver-bio">Known for precision driving and tactical race strategy that keeps us competitive.</p>
-                    </div>
-                </div>
-                <div class="driver-card">
-                    <div class="driver-number">03</div>
-                    <div class="driver-info">
-                        <h3 class="driver-name">Reserve Driver</h3>
-                        <p class="driver-role">Development Talent</p>
-                        <p class="driver-bio">Rising star ready to step up and prove their mettle on any circuit.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Polytrack Section -->
-    <section id="polytrack" class="section section-dark">
-        <div class="container">
-            <h2 class="section-title">Polytrack</h2>
-            <div class="content-card">
-                <div class="card-content">
-                    <p>Polytrack represents our commitment to diverse racing disciplines. From karting to endurance racing, we compete across multiple platforms to sharpen our skills and test our limits.</p>
-                    <p>This multi-series approach ensures our drivers are well-rounded competitors capable of adapting to any racing environment, from the tight corners of K1 Santa Clara to the high-speed straights of international circuits.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Teams & Drivers Section -->
-    <section id="teams" class="section">
-        <div class="container">
-            <h2 class="section-title">Teams & Drivers</h2>
+            <h2 class="section-title">Teams & Driver Lineup</h2>
             <div class="team-grid">
                 <div class="team-card">
                     <div class="team-title">Ferrari 499P Hypercar (13 Car)</div>
@@ -1051,7 +1012,7 @@
                         <li>Jordan</li>
                         <li>Eli</li>
                     </ul>
-                    <a class="discord-cta" href="https://discord.gg/9T5zGGSZ" target="_blank" rel="noopener" style="display:inline-block;color:var(--primary-color);font-weight:700;margin-top:8px;">Join the Discord</a>
+                    <a class="discord-cta" href="https://discord.gg/9T5zGGSZ" target="_blank" rel="noopener">Join the Discord</a>
                 </div>
                 <div class="team-card">
                     <div class="team-title">Nascar 88 Car</div>
@@ -1083,8 +1044,53 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="section" style="padding-top:60px; padding-bottom:0;">
+                <h2 class="section-title" style="margin-bottom:2rem;">Featured Drivers</h2>
+                <div class="drivers-grid">
+                    <div class="driver-card">
+                        <div class="driver-number">01</div>
+                        <div class="driver-info">
+                            <h3 class="driver-name">Lead Driver</h3>
+                            <p class="driver-role">Primary Pilot</p>
+                            <p class="driver-bio">Our lead driver brings years of experience and an unmatched competitive spirit to every race.</p>
+                        </div>
+                    </div>
+                    <div class="driver-card">
+                        <div class="driver-number">02</div>
+                        <div class="driver-info">
+                            <h3 class="driver-name">Second Driver</h3>
+                            <p class="driver-role">Performance Specialist</p>
+                            <p class="driver-bio">Known for precision driving and tactical race strategy that keeps us competitive.</p>
+                        </div>
+                    </div>
+                    <div class="driver-card">
+                        <div class="driver-number">03</div>
+                        <div class="driver-info">
+                            <h3 class="driver-name">Reserve Driver</h3>
+                            <p class="driver-role">Development Talent</p>
+                            <p class="driver-bio">Rising star ready to step up and prove their mettle on any circuit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Polytrack Section -->
+    <section id="polytrack" class="section section-dark">
+        <div class="container">
+            <h2 class="section-title">Polytrack</h2>
+            <div class="content-card">
+                <div class="card-content">
+                    <p>Polytrack represents our commitment to diverse racing disciplines. From karting to endurance racing, we compete across multiple platforms to sharpen our skills and test our limits.</p>
+                    <p>This multi-series approach ensures our drivers are well-rounded competitors capable of adapting to any racing environment, from the tight corners of K1 Santa Clara to the high-speed straights of international circuits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
 
     <!-- Team History Section -->
     <section id="team-history" class="section">
